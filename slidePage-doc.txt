@@ -1,0 +1,28 @@
+﻿/**
+ * LBS slidePage 绝对定位方式 支持WP
+ * Date: 2014-11-20
+ * ===================================================
+ * opts.el 外围包裹容器/滑动事件对象(一个字符串的CSS选择器或者元素对象)
+ * opts.index 索引(默认0) 指定显示哪个索引的页
+ * opts.current	当前页添加的类名(默认'current')
+ * opts.navShow 是否需要导航指示 默认false不需要 
+ * opts.navClass 导航指示容器的类名 方便设置样式 (默认'slide-nav') 
+ * opts.auto 是否自动播放 默认false
+ * opts.delay 自动播放间隔时间 默认5000(单位毫秒) 自动播放时有效
+ * opts.locked 是否锁定头尾滑动  默认false 如果开启则不能使用自动播放
+ * opts.effect 动画效果(平移=translate 缩放=scale 重叠=overlap) 默认平移
+ * opts.duration 动画持续时间 默认300(单位毫秒) 
+ * opts.minScale 动画效果为缩放时的最小缩放比率(0 ~ 1) 1为没有缩放效果 默认0.5
+ * opts.start 手指按下时 执行函数
+ * opts.move 手指移动中 执行函数
+ * opts.end 手指收起后 执行函数
+ * ===================================================
+ * this.box 包裹页的容器对象
+ * this.index 当前索引
+ * this.length 有多少页 最后一页的索引为 this.length-1
+ * this.play 调用自动播放的方法 
+ * this.stop 清除自动播放的方法
+ * this.up 手动调用向上滑动翻页的方法 方便增加点击按钮时调用
+ * this.down 手动调用向下滑动翻页的方法
+ * ===================================================
+ **/

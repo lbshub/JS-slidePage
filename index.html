@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+	<meta name="format-detection"content="telephone=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>翻页场景动画</title>
+	<style type="text/css">
+		*{margin: 0; padding: 0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+		html{font-size:20px;font-family:"Helvetica Neue",Helvetica,STHeiTi,Arial;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;height:100%;max-width:640px;margin:0 auto; }
+		body{font-size:100%;line-height:1.5;background: #fff;width: 100%;height:100%;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+		img{border:none;vertical-align:top;}
+		a{text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+		ul,li{list-style:none;}
+
+		/* slidePage Start */
+		.slide-nav{position: fixed; right: 5px; top: 50%; z-index: 888; }
+		.slide-nav li{list-style:none; width: 8px; height: 8px; border-radius:8px; margin-bottom: 5px; line-height: 0; font-size: 0; overflow: hidden; 	background: #fff; opacity: .5; }
+		.slide-nav li.current{opacity: .8;}
+		/* slidePage End */
+
+		.slide-box{width: 100%; overflow: hidden;}
+		.slide-box{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-khtml-user-select:none;user-select:none;}
+		.slide-page{ width: 100%; position: relative; overflow: hidden;   color: #fff; font-size:64px; text-align: center; }
+		.page1{background: #E72D3D url(images/bg1.jpg) no-repeat; background-size: 100% 100%;}
+		.page2{background: #E72D3D;}
+		.page3{background: #E72D3D;}
+		.page4{background: #E72D3D;}
+		.page5{background: #E72D3D;}
+		
+		/* 动画方式写法1 */
+		.slide-page div{display: none; position: absolute;}
+		.slide-page.current div{display: block;}
+		/* page1 start*/
+		.page1 .div1{
+			width: 10.52rem;
+			height: 7.6rem;
+			top: 50%;
+			left: 50%;
+			margin:-3rem 0 0 -5.26rem;
+			background:url(images/p002.png) 50% no-repeat;
+			background-size: 100%;
+		}
+		.page1.current .div1{
+			animation: bounceIn 1s; -webkit-animation: bounceIn 1s;
+		}
+		.page1 .div2{
+			width: 11.8rem;
+			height: 1.8rem;
+			left: 50%;
+			bottom: 2.5rem;
+			margin-left: -5.9rem;
+			background:url(images/p003.png) 50% no-repeat;
+			background-size: 100%;
+		}
+		.page1.current .div2{
+			animation: fadeInToTop 1s; -webkit-animation: fadeInToTop 1s;
+		}
+
+		/*page2 start*/
+		.page2 .div1{
+			width: 10.2rem;
+			height: 3.25rem;
+			top:2.5rem;
+			left: 50%;
+			margin-left:-5.1rem;
+			background:url(images/p004.png) 50% no-repeat;
+			background-size: 100%;
+		}
+		.page2.current .div1{
+			animation: swing 1s infinite; -webkit-animation: swing 1s infinite;
+		} 
+		.page2 .div2{
+			width: 5.7rem;
+			height: 3.25rem;
+			top:8rem;
+			left: 50%;
+			margin-left: -2.85rem;
+			background:url(images/p005.png) 50% no-repeat;
+			background-size: 100%;
+		}
+		.page2.current .div2{
+			animation: bounceIn 1s; -webkit-animation: bounceIn 1s;
+		}
+		.page2 .div3{
+			width: 15rem;
+			height:4rem;
+			top:50%;
+			left: 50%;
+			margin:0 0 0 -7.5rem;
+			font-size:0.7rem;
+			color: #fff;
+			line-height:2;
+			text-align: center;
+		}
+		.page2.current .div3{
+			animation: fadeInToTop 1s; -webkit-animation: fadeInToTop 1s;
+		}  
+
+		/*page3 start*/
+		.page3 .div1{
+			width: 10.2rem;
+			height: 9.55rem;
+			top:2.5rem;
+			left: 50%;
+			margin-left:-5.1rem;
+			background:url(images/p006.png) 50% no-repeat;
+			background-size: 100%;
+		}
+		.page3.current .div1{
+			animation: bounceIn 1s; -webkit-animation: bounceIn 1s;
+		}		
+		.page3 .div2{
+			width: 10rem;
+			top:50%;
+			left: 50%;
+			margin:1rem 0 0 -5rem;
+			font-size: 0.7rem;
+			color: #fff;
+			line-height: 1.8;
+			text-align: center;
+		}
+		.page3.current .div2{
+			animation: fadeInToTop 1s; -webkit-animation:  fadeInToTop 1s;
+		}
+		.page3 .div3{
+			width: 10rem;
+			bottom:2.5rem;
+			left: 50%;
+			margin-left:-5rem;
+			font-size: 1.2rem;
+			color: #fff;
+			line-height: 2;
+			text-align: center;
+		}
+		.page3.current .div3{
+			animation: fadeInToTop 1s; -webkit-animation:  fadeInToTop 1s;
+		}
+		
+		/*page4 start*/
+		.page4 .div1{
+			width: 9.95rem;
+			height: 7.4rem;
+			top:50%;
+			left: 50%;
+			margin:-3.52rem 0 0 -4.975rem;
+			background:url(images/p008.png) 50% no-repeat;
+			background-size: 100%;
+		}
+		.page4.current .div1{
+			animation: bounceIn 1s; -webkit-animation: bounceIn 1s;
+		}	
+
+		/* css3 animate */
+		@-webkit-keyframes bounceIn{
+			0%{opacity:0;-webkit-transform:scale(.5);transform:scale(.5)}
+			100%{opacity:1;-webkit-transform:scale(1);transform:scale(1)}
+		}
+		@keyframes bounceIn{
+			0%{opacity:0;-webkit-transform:scale(.5);transform:scale(.5)}
+			100%{opacity:1;-webkit-transform:scale(1);transform:scale(1)}
+		}
+		@-webkit-keyframes bounceOut{
+			0%{opacity:1;-webkit-transform:scale(1);transform:scale(1)}
+			100%{opacity:0;-webkit-transform:scale(.5);transform:scale(.5)}
+		}
+		@keyframes bounceOut{
+			0%{opacity:1;-webkit-transform:scale(1);transform:scale(1)}
+			100%{opacity:0;-webkit-transform:scale(.5);transform:scale(.5)}
+		}
+		@-webkit-keyframes fadeInToTop{
+			0%{opacity:0;-webkit-transform:translateY(100px);transform:translateY(100px);}
+			100%{opacity:1;-webkit-transform:translateY(0);transform:translateY(0);}
+		}
+		@keyframes fadeInToTop{
+			0%{opacity:0;-webkit-transform:translateY(100px);transform:translateY(100px);}
+			100%{opacity:1;-webkit-transform:translateY(0);transform:translateY(0);}
+		}
+		@-webkit-keyframes fadeInToBottom{
+			0%{opacity:0;-webkit-transform:translateY(-1000px);transform:translateY(-1000px);}
+			100%{opacity:1;-webkit-transform:translateY(0);transform:translateY(0);}
+		}
+		@keyframes fadeInToBottom{
+			0%{opacity:0;-webkit-transform:translateY(-1000px);transform:translateY(-1000px);}
+			100%{opacity:1;-webkit-transform:translateY(0);transform:translateY(0);}
+		}
+		
+		@-webkit-keyframes swing{
+			20%{-webkit-transform:rotate3d(0,0,1,15deg);transform:rotate3d(0,0,1,15deg);}
+			40%{-webkit-transform:rotate3d(0,0,1,-10deg);transform:rotate3d(0,0,1,-10deg);}
+			60%{-webkit-transform:rotate3d(0,0,1,5deg);transform:rotate3d(0,0,1,5deg);}
+			80%{-webkit-transform:rotate3d(0,0,1,-5deg);transform:rotate3d(0,0,1,-5deg);}
+			100%{-webkit-transform:rotate3d(0,0,1,0deg);transform:rotate3d(0,0,1,0deg);}
+		}
+		@keyframes swing{
+			20%{-webkit-transform:rotate3d(0,0,1,15deg);transform:rotate3d(0,0,1,15deg);}
+			40%{-webkit-transform:rotate3d(0,0,1,-10deg);transform:rotate3d(0,0,1,-10deg);}
+			60%{-webkit-transform:rotate3d(0,0,1,5deg);transform:rotate3d(0,0,1,5deg);}
+			80%{-webkit-transform:rotate3d(0,0,1,-5deg);transform:rotate3d(0,0,1,-5deg);}
+			100%{-webkit-transform:rotate3d(0,0,1,0deg);transform:rotate3d(0,0,1,0deg);}
+		}
+
+		/*arrow */
+		#arrow{position:fixed;bottom:10px;left:50%;z-index:150;width:24px;height:14px;margin-left:-7px;}
+		#arrow img{position:absolute;top:50%;left:50%;margin:-7px 0 0 -14px;width:24px;height:14px;-webkit-animation:start 1.5s infinite both;animation:start 1.5s infinite both;}
+		@-webkit-keyframes start{
+			0%,30%{opacity:0;-webkit-transform:translate(0,10px);}
+			60%{opacity:1;-webkit-transform:translate(0,0);}
+			100%{opacity:0;-webkit-transform:translate(0,-8px);}
+		}
+		@keyframes start{
+			0%,30%{opacity:0;transform:translate(0,10px);}
+			60%{opacity:1;transform:translate(0,0);}
+			100%{opacity:0;transform:translate(0,-8px);}
+		}
+
+	</style>
+</head>
+<body>
+
+<div id="slidePageBox" class="slide-box">
+	<section class="slide-page page1">
+		<div class="div1"></div>
+		<div class="div2"></div>
+	</section>
+	<section class="slide-page page2">
+		<div class="div1"></div>
+		<div class="div2"></div>
+		<div class="div3">
+			<p>一生就这么一次，</p>
+			<p>谈一场以结婚为目的的恋爱吧。</p>
+			<p>不再因为任性而不肯低头，</p> 
+			<p>不再因为固执而轻言分手。</p>
+			<p>最后地坚信一次，一直走，就可以到白头。</p>
+			<p>惟愿这一生，执子之手，与子偕老。</p>
+			<p>你敢天长，我就敢地久。</p>
+		</div>
+	</section>
+	<section class="slide-page page3">
+		<div class="div1"></div>
+		<div class="div2">
+			<p>深思熟虑之后我们决定</p>
+			<p>为爱情做出重要的延续</p>
+		</div>
+		<div class="div3">邀请您一起见证</div>
+	</section>
+	<section class="slide-page page4">
+		<div class="div1"></div>
+	</section>
+</div>	
+<section id="arrow"><img src="images/arrow.png"></section>
+
+<script type="text/javascript" src="slidePage.min.js" ></script>
+<script type="text/javascript">
+//use slidePage
+var arrow = document.getElementById('arrow'),
+	slide = new slidePage({
+		el: '#slidePageBox',
+		// locked: true,
+		// index: 2,
+		navShow: true,
+		// auto: true,
+		// delay: 8000,
+		effect: 'scale',
+		duration: 400,
+		// minScale: 0.8,
+		end: function() {
+			if(slide.index == slide.length - 1){
+				arrow.style.display = 'none';
+			}else{
+				arrow.style.display = 'block';
+			}
+		}
+	});
+</script>
+<script>
+(function(doc, win) {
+    var docEl = doc.documentElement, 
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function() {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            clientWidth > 640 && (clientWidth = 640);
+            docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+        };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</body>
+</html>
